@@ -6,7 +6,7 @@ public abstract class Prodotto {
 
     public Prodotto() {}
 
-    public Prodotto(double prodotto, double costo){
+    public Prodotto(double peso, double costo){
         this.peso = peso;
         this.costo = costo;
     }
