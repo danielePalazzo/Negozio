@@ -14,12 +14,17 @@ public class Racchetta extends Prodotto{
 
     @Override
     public String getAttribute() {
-        return this.tipo;
+        return null;
     }
 
     public String getMarca() {
         return this.marca;
     }
+
+    public String getTipo(){
+        return this.tipo;
+    }
+
 
 }
 

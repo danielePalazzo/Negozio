@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class Negozio {
 
     public static void main(String[] args) {
-
-        ArrayList<Prodotto> prodotti = new ArrayList<>();
-        System.out.println(prodotti.size());
+        Negozio2 negozio = new Negozio2();
+        System.out.println(negozio.contaProdotti());
 
         Libro l1 = new Libro(2.5, 12.50, "IBN123", "Libro 1", "Fantasy", 300);
         Libro l2 = new Libro(3, 10, "IBN234", "Libro 2", "Horror", 356);
@@ -21,72 +20,25 @@ public class Negozio {
         Racchetta r2 = new Racchetta(1.3, 99, "Adidas", "Rotonda");
         Racchetta r3 = new Racchetta(1.2, 201.00, "Adidas", "A goccia");
 
-        aggiungiProdotto(prodotti, l1);
-        aggiungiProdotto(prodotti, l2);
-        aggiungiProdotto(prodotti, l3);
-        System.out.println("Numero prodotti presenti: " + prodotti.size());
+        negozio.add(l1);
+        negozio.add(l2);
+        negozio.add(l3);
 
+        negozio.add(d1);
+        negozio.add(d2);
+        negozio.add(d2);
 
-        int numeroLibriFantasy = cercaNumeroLibriFantasy(prodotti);
-        System.out.println("Libri fantasy: " + numeroLibriFantasy);
+        negozio.add(r1);
+        negozio.add(r2);
+        negozio.add(r3);
 
-        aggiungiProdotto(prodotti, r1);
-        aggiungiProdotto(prodotti, r2);
-        aggiungiProdotto(prodotti, r3);
-        System.out.println("Numero prodotti aggiornato: " + prodotti.size());
+        Prodotto prodottoCostoso = negozio.getProdottoCostoso();
+        ArrayList<Racchetta> racchetteGoccia = negozio.cercaRacchette();
 
-        ArrayList<Prodotto> numeroRacchette = cercaRacchette(prodotti, "A goccia");
-
-        System.out.println("Prodotto più costoso: " + getProdottoCostoso(prodotti));
-        System.out.println("Numero prodotti: " + contaProdotti(prodotti));
-        System.out.println("Peso prodotti: " + pesaProdotti(prodotti));
-        System.out.println("Numero racchette a goccia: " + numeroRacchette.size());
-
-    }
-
-    public static int contaProdotti(ArrayList<Prodotto> prodotti){
-        return prodotti.size();
-    }
-
-    public static double pesaProdotti(ArrayList<Prodotto> pr){
-        double peso = 0;
-        for (Prodotto prodotto : pr) {
-            peso += prodotto.getPeso();
-        }
-        return peso;
-    }
-
-    public static double getProdottoCostoso(ArrayList<Prodotto> pr){
-        double costo = 0;
-        for (Prodotto prodotto : pr) {
-            if (prodotto.getCosto() > costo) {
-                costo = prodotto.getCosto();
-            }
-        }
-        return costo;
-    }
-
-    public static void aggiungiProdotto(ArrayList<Prodotto> p, Prodotto p1){
-        p.add(p1);
-    }
-
-    public static int cercaNumeroLibriFantasy(ArrayList<Prodotto> pr){
-        int count = 0;
-        for (Prodotto p : pr){
-            if (p.getAttribute().equalsIgnoreCase("fantasy")){
-                count++;
-            }
-        }
-        return count;
-    }
-
-    public static ArrayList<Prodotto> cercaRacchette(ArrayList<Prodotto> pr, String tipo){  // NON FUNZIONA
-        ArrayList<Prodotto> prAr = new ArrayList<>();
-        for (int i = 0; i < pr.size(); i++){
-            if(pr.get(i) instanceof Racchetta && pr.get(i).getAttribute().equalsIgnoreCase(tipo) && pr.get(i).getCosto() > 100.00){
-                prAr.add(pr.get(i));
-            }
-        }
-        return prAr;
+        System.out.println("Numero prodotti presenti: " + negozio.contaProdotti());
+        System.out.println("Peso totale prodotti: " + negozio.pesaProdotti());
+        System.out.println("Prodotto più costoso: " + prodottoCostoso);
+        System.out.println("Numero libri fantasy: " + negozio.cercaNumeroLibriFantasy());
+        System.out.println("Racchette a goccia: " + racchetteGoccia.size());
     }
 }
